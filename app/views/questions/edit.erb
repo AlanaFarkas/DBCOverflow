@@ -1,1 +1,23 @@
-edit.erb
+<div class="edit-question-form">
+  <form method="post" action="/questions/<%= @question.id %>">
+    <input tye="hidden" name="_method" value="put">
+    <textarea name="body"><%= @question.body %></textarea>
+    <input type="submit" value="Edit Your Question">
+  </form>
+
+  <% if @errors %>
+    <% @errors.each do |message| %>
+      <ul>
+        <li>message</li>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="delete-question-form">
+  <form method="post" action="/questions/<%= @question.id %>">
+    <input tye="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Your Question">
+  </form>
+
+</div>

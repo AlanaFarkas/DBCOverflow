@@ -3,7 +3,21 @@
 <div id="question-body-container">
   <!-- Vote form and button -->
   <p><%= @question.body %></p>
+  <% @question.tags.each do |tag| %>
+    <ul>
+      <li><%= tag %></li>
+    </ul>
+   <% end %>
+  <% end %>
 
+  <% if @question.user.id == current_user.id %>
+    <p><a href="/questions/<%=@question.id%>/edit"</p>
+  <% end %>
+
+  <p><%= @question.user.username %></p>
+  <p><%= @question.created_at %></p>
+
+  <!-- add a comment button -->
 </div>
 
 <% if @questions.answers.length == 1 %>
