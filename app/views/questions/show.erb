@@ -1,1 +1,29 @@
-show.erb
+<h1> <%= @question.title %></h1>
+
+<div id="question-body-container">
+  <!-- Vote form and button -->
+  <p><%= @question.body %></p>
+
+</div>
+
+<% if @questions.answers.length == 1 %>
+  <h2><%= @questions.answers.length %> Answer</h2>
+<% else %>
+ <h2><%= @questions.answers.length %> Answers</h2>
+<% end %>
+
+<div id="answer-list">
+  <% @question.answers.each do |answer| %>
+    <div class="answer-body">
+      <%= answer.body %>
+      <div class="comment-list">
+        <% answer.comments.each do |comment| %>
+          <% comment.body %>
+        <% end %>
+        <!-- add button for comment form that will appear view javascript -->
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<!-- form for a new answerr -->
