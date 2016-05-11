@@ -19,7 +19,16 @@
 </head>
 <body>
   <h1>Beer Overflow</h1>
-  <a href="/users">See all Users</a>
+
+  <% if logged_in? %>
+  <a href='/logout'>Logout</a>
+  <a href='/users'>See all Users</a>
+
+  <% else %>
+  <a href='/login'>Login</a>
+  <a href='/users/new'>Sign Up</a>
+
+  <% end %>
   <%= yield %>
 
 </body>

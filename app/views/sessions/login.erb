@@ -1,6 +1,14 @@
 <h1>Log into your Account</h1>
 <form method="POST" action="/login">
-<div><input type="text" name="user[username]" placeholder="Email"></div>
+<div><input type="text" name="user[username]" placeholder="Username"></div>
 <div><input type="password" name="user[password]" placeholder="Password"></div>
- <input type="submit" value="Login">
+<input type="submit" value="Login">
 </form>
+
+<%if @errors%>
+  <ul>
+  <% @errors.each do |error|%>
+    <li><%=error.full_message%></li>
+  <%end%>
+  </ul>
+<%end%>

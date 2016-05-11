@@ -13,7 +13,7 @@ end
 
 post '/users' do
   @user = User.new(params[:user])
-  if @user.fave
+  if @user.save
     redirect '/'
   else
     @errors = @user.errors.full_messages
