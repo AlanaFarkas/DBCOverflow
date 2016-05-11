@@ -1,6 +1,6 @@
 <div class="edit-question-form">
   <form method="post" action="/questions/<%= @question.id %>">
-    <input tye="hidden" name="_method" value="put">
+    <input type="hidden" name="_method" value="put">
     <textarea name="body"><%= @question.body %></textarea>
     <input type="submit" value="Edit Your Question">
   </form>
@@ -16,7 +16,7 @@
 
 <div class="delete-question-form">
   <form method="post" action="/questions/<%= @question.id %>">
-    <input tye="hidden" name="_method" value="delete">
+    <input type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Your Question">
   </form>
 

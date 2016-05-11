@@ -5,13 +5,12 @@
   <p><%= @question.body %></p>
   <% @question.tags.each do |tag| %>
     <ul>
-      <li><%= tag %></li>
+      <li><%= tag.name %></li>
     </ul>
    <% end %>
-  <% end %>
 
   <% if @question.user.id == current_user.id %>
-    <p><a href="/questions/<%=@question.id%>/edit"</p>
+    <p><a href="/questions/<%=@question.id%>/edit">Edit Question</a></p>
   <% end %>
 
   <p><%= @question.user.username %></p>
@@ -20,10 +19,10 @@
   <!-- add a comment button -->
 </div>
 
-<% if @questions.answers.length == 1 %>
-  <h2><%= @questions.answers.length %> Answer</h2>
+<% if @question.answers.length == 1 %>
+  <h2><%= @question.answers.length %> Answer</h2>
 <% else %>
- <h2><%= @questions.answers.length %> Answers</h2>
+ <h2><%= @question.answers.length %> Answers</h2>
 <% end %>
 
 <div id="answer-list">

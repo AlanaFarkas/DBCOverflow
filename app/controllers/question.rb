@@ -18,7 +18,7 @@ post '/questions' do
         @question.tags << old_tag
       else
         new_tag = Tag.create(name: tag)
-        @questions << new_tag
+        @question.tags << new_tag
       end
     end
     redirect "/questions/#{@question.id}"
