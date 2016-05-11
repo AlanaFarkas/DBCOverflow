@@ -1,6 +1,6 @@
 <h1>See all Users</h1>
 
 <% @users.each do |user| %>
-  <%=user.username %>
-  <%=user.bio %>
+<!--   <a href='/users/#{user.id}'><%=user.username %></a> -->
+  <a href='/users/<%=user.id%>'><%= user.username %></a>
 <% end %>
