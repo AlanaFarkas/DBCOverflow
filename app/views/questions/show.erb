@@ -16,7 +16,7 @@
   <p><a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></p>
   <p><%= @question.created_at %></p>
 
-  <p> Comments </p>
+  <h4> Comments </h4>
 
   <%  @question.comments.each do |comment| %>
     <%= erb :'/comments/_questions-comments', locals: {comment: comment} %>
