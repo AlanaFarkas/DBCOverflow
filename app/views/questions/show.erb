@@ -1,14 +1,8 @@
 <h1><%= @question.title %></h1>
 
 <div id="question-body-container">
-  <form method="post" action="/questions/<%= @question.id %>/upvote">
-    <button type="submit" name="submit_param" value="submit_value"></button>
-  </form>
-  <p><%= @question.points%></p>
-  <form method="post" action="/questions/<%= @question.id %>/downvote">
-    <button type="submit" name="submit_param" value="submit_value"></button>
-  </form>
-  <!-- Vote form and button -->
+  <%= erb :'/questions/_questions-vote-form', layout: false, locals: {question: @question} %>
+
   <p><%= @question.body %></p>
   <% @question.tags.each do |tag| %>
     <ul>

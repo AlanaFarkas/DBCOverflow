@@ -1,5 +1,7 @@
 <!-- Answers partial for questions show page -->
 <div class="answer-body">
+  <%= erb :'/answers/_answers-vote-form', layout: false, locals: {answer: answer } %>
+
   <p><%= answer.body %></p>
   <p><a href="/users/<%= answer.user.id %>"><%= answer.user.username %></a></p>
   <p><%= answer.created_at %></p>
