@@ -9,7 +9,7 @@
     </ul>
    <% end %>
 
-  <% if @question.user.id == current_user.id %>
+  <% if @current_user &&  @question.user.id == @current_user.id %>
     <p><a href="/questions/<%=@question.id%>/edit">Edit Question</a></p>
   <% end %>
 
@@ -31,4 +31,4 @@
   <% end %>
 </div>
 
-<!-- form for a new answerr -->
+<%= erb :'/answers/_answers-form', locals: {question: @question} %>
