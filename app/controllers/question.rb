@@ -10,6 +10,7 @@ end
 post '/questions' do
   @question = Question.new(title: params[:title], body: params[:body], user_id: current_user.id)
   tags = params[:tags].split(", ")
+  @comments = @question.comments
 
   if @question.save
     tags.each do |tag|
@@ -30,6 +31,7 @@ end
 
 get '/questions/:id' do
   @question = Question.find_by(id: params[:id])
+  @comments = @question.comments
 
   erb :'/questions/show'
 end
