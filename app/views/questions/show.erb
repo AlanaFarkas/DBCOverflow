@@ -1,0 +1,34 @@
+<h1><%= @question.title %></h1>
+
+<div id="question-body-container">
+  <!-- Vote form and button -->
+  <p><%= @question.body %></p>
+  <% @question.tags.each do |tag| %>
+    <ul>
+      <li><%= tag.name %></li>
+    </ul>
+   <% end %>
+
+  <% if @question.user.id == current_user.id %>
+    <p><a href="/questions/<%=@question.id%>/edit">Edit Question</a></p>
+  <% end %>
+
+  <p><a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></p>
+  <p><%= @question.created_at %></p>
+
+  <!-- add a comment button -->
+</div>
+
+<% if @question.answers.length == 1 %>
+  <h2><%= @question.answers.length %> Answer</h2>
+<% else %>
+ <h2><%= @question.answers.length %> Answers</h2>
+<% end %>
+
+<div id="answer-list">
+  <% @question.answers.each do |answer| %>
+    <%= erb :'/questions/_answers', locals: {answer: answer} %>
+  <% end %>
+</div>
+
+<!-- form for a new answerr -->
