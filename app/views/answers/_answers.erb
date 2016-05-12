@@ -3,18 +3,19 @@
   <%= erb :'/answers/_answers-vote-form', layout: false, locals: {answer: answer } %>
 
   <p><%= answer.body %></p>
-  <p><a href="/users/<%= answer.user.id %>"><%= answer.user.username %></a></p>
-  <p><%= answer.created_at %></p>
+  <p>Author: <a href="/users/<%= answer.user.id %>"><%= answer.user.username %></a></p>
+  <p>posted <%= answer.time_since_creation %> hours ago</p>
 
-  <h4>Comments</h4>
-    <div class="comment-list">
-      <%= erb :'/comments/_answers-comments', layout: false, locals: {comments: answer.comments} %>
-
+  <div id="answer-comments-container">
+    <h4>Comments</h4>
+      <div id="answer-comment-list">
+        <%= erb :'/comments/_answers-comments', layout: false, locals: {comments: answer.comments} %>
+      </div>
       <% if logged_in? %>
         <%= erb :'/comments/_comments-new-answers', layout: false, locals: {answer: answer } %>
       <% else %>
         <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
       <% end %>
-    </div>
+  </div>
 
 </div>

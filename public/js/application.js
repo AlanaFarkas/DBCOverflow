@@ -16,10 +16,10 @@ $(document).ready(function() {
       });
     });
 
-  $('#question-comments-container').on('submit', '#new-comment-form', function(e){
+  $('#question-comments-container').on('submit', '#new-comment-form-question', function(e){
       e.preventDefault();
 
-      var data= $(e.target).serialize();
+      var data = $(e.target).serialize();
       var url = e.target.action;
       var type = e.target.method;
       debugger;
@@ -32,4 +32,22 @@ $(document).ready(function() {
         $('#question-comment-list').append(response);
       });
   });
+
+  //Comments for answers
+  $('#answer-comments-container').on('submit', '#new-comment-form-answer', function(e) {
+    e.preventDefault();
+
+    var data = $(e.target).serialize();
+    var url = e.target.action;
+    var type = e.target.method;
+
+    $.ajax({
+      type: type,
+      url: url,
+      data: data
+    }).done(function(response){
+      $('#answer-comment-list').append(response);
+    });
+  });
+
 });

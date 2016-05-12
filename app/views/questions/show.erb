@@ -14,20 +14,20 @@
     <p><a href="/questions/<%=@question.id%>/edit">Edit Question</a></p>
   <% end %>
 
-  <p><a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></p>
-  <p><%= @question.created_at %></p>
+  <p>Author: <a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></p>
+  <p>posted <%= @question.time_since_creation %> hours ago</p>
 
   <div id="question-comments-container">
     <h4> Comments </h4>
     <div id="question-comment-list">
-    <%  @question.comments.each do |comment| %>
-      <%= erb :'/comments/_questions-comments', locals: {comment: comment} %>
-    <% end %>
-  </div>
-  <% if logged_in? %>
-    <%= erb :'/comments/_comments-new-questions', locals: {question: @question} %>
+      <%  @question.comments.each do |comment| %>
+        <%= erb :'/comments/_questions-comments', locals: {comment: comment} %>
+      <% end %>
+    </div>
+    <% if logged_in? %>
+      <%= erb :'/comments/_comments-new-questions', locals: {question: @question} %>
     <% else %>
-        <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
+      <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
     <% end %>
   </div>
 </div>

@@ -1,16 +1,14 @@
 post '/answers' do
   @answer = Answer.new(body: params[:body], user_id: current_user.id, question_id: params[:question_id])
-  if @answer.save
-
-    if request.xhr?
-      erb :'/answers/_answers', layout: false, locals: {answer: @answer}
-    else
-      redirect "/questions/#{params[:question_id]}"
-    end
+  if request.xhr?
+    @answer.save
+    erb :'/answers/_answers', layout: false, locals: {answer: @answer}
   else
-    @answer_errors = @answer.errors.full_messages
+    @answer.save
     redirect "/questions/#{params[:question_id]}"
   end
+  @answer_errors = @answer.errors.full_messages
+  redirect "/questions/#{params[:question_id]}"
 end
 
 post '/answers/:id/upvote' do
