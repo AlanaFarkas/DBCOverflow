@@ -15,7 +15,9 @@
 
   <p><a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></p>
   <p><%= @question.created_at %></p>
-
+  <%  @question.comments.each do |comment| %>
+    <p><%= erb :'/comments/_comments', locals: {comment: comment} %></p>
+  <% end %>
   <!-- add a comment button -->
 </div>
 
@@ -27,7 +29,7 @@
 
 <div id="answer-list">
   <% @question.answers.each do |answer| %>
-    <%= erb :'/questions/_answers', locals: {answer: answer} %>
+    <%= erb :'/answers/_answers', locals: {answer: answer} %>
   <% end %>
 </div>
 
