@@ -18,24 +18,24 @@
   <p><%= @question.created_at %></p>
 
   <h4> Comments </h4>
+    <%  @question.comments.each do |comment| %>
+      <%= erb :'/comments/_questions-comments', locals: {comment: comment} %>
+    <% end %>
 
-  <%  @question.comments.each do |comment| %>
-    <%= erb :'/comments/_questions-comments', locals: {comment: comment} %>
-  <% end %>
-
-  <% if logged_in? %>
-  <%= erb :'/comments/_comments-new-questions', locals: {question: @question} %>
-  <% else %>
-      <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
-  <% end %>
-
+    <% if logged_in? %>
+    <%= erb :'/comments/_comments-new-questions', locals: {question: @question} %>
+    <% else %>
+        <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
+    <% end %>
 </div>
 
-<% if @question.answers.length == 1 %>
-  <h2><%= @question.answers.length %> Answer</h2>
-<% else %>
- <h2><%= @question.answers.length %> Answers</h2>
-<% end %>
+<div id="number-answers">
+  <% if @question.answers.length == 1 %>
+    <h2><%= @question.answers.length %> Answer</h2>
+  <% else %>
+   <h2><%= @question.answers.length %> Answers</h2>
+  <% end %>
+</div>
 
 <div id="answer-list">
   <% @question.answers.each do |answer| %>
@@ -43,10 +43,12 @@
   <% end %>
 </div>
 
-<h2>Post an Answer</h2>
+<div id="post-answer">
+  <h2>Post an Answer</h2>
 
-<% if logged_in? %>
-  <%= erb :'/answers/_answers-form', locals: {question: @question} %>
-<% else %>
-  <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
-<% end %>
+  <% if logged_in? %>
+    <%= erb :'/answers/_answers-form', locals: {question: @question} %>
+  <% else %>
+    <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
+  <% end %>
+</div>
