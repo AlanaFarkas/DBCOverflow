@@ -1,0 +1,13 @@
+<div class="answer-body">
+  <p><%= answer.body %></p>
+  <p><a href="/users/<%= answer.user.id %>"><%= answer.user.username %></a></p>
+  <p><%= answer.created_at %></p>
+
+  <div class="comment-list">
+    <% answer.comments.each do |comment| %>
+      <p><%= comment.body %></p>
+      <p><a href="/users/<%= answer.user.id %>"><%= comment.user.username %></a></p>
+    <% end %>
+    <!-- add button for comment form that will appear view javascript -->
+  </div>
+</div>

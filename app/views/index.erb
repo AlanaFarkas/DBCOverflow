@@ -1,0 +1,19 @@
+<h3>All Questions</h3>
+
+<div class="questions-list-container">
+  <% @questions.each do |question| %>
+    <div class="inidividual-question-container">
+      <!-- number of votes, answers, views -->
+      <h2><a href="/questions/<%= question.id %>"><%= question.title %></a></h2>
+      <% question.tags.each do |tag| %>
+        <ul>
+          <li><%= tag.name %></li>
+        </ul>
+      <% end %>
+      <p><a href="/users/<%= question.user.id %>"><%= question.user.username %></a></p>
+    </div>
+  <% end %>
+</div>
+
+
+
