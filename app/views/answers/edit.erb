@@ -1,0 +1,13 @@
+<h3>Edit Your Answer</h3>
+<form method="post" action="/answers">
+  <input type="hidden" name="_method" value="put">
+  <textarea name="body"><%= @answer.body %></textarea>
+  <input type="submit" value="Update Your Answer">
+</form>
+<% if @answer_update_errors %>
+  <% @answer_update_errors.each do |message| %>
+    <ul>
+      <li><%=message%></li>
+    </ul>
+  <% end %>
+<% end %>
