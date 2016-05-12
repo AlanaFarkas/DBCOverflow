@@ -6,7 +6,8 @@
 
   <div class="comment-list">
 
-    <%= erb :'_comments' layout: false%>
+    <%= erb :'/comments/_answers-comments', layout: false, locals: {comments: answer.comments} %>
 
+    <%= erb :'/comments/_comments-new-answers', layout: false, locals: {answer: answer } %>
   </div>
 </div>

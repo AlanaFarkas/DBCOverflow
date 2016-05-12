@@ -15,10 +15,15 @@
 
   <p><a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></p>
   <p><%= @question.created_at %></p>
+
+  <p> Comments </p>
+
   <%  @question.comments.each do |comment| %>
-    <p><%= erb :'/comments/_comments', locals: {comment: comment} %></p>
+    <%= erb :'/comments/_questions-comments', locals: {comment: comment} %>
   <% end %>
-  <!-- add a comment button -->
+
+  <%= erb :'/comments/_comments-new-questions', locals: {question: @question} %>
+
 </div>
 
 <% if @question.answers.length == 1 %>
@@ -32,5 +37,7 @@
     <%= erb :'/answers/_answers', locals: {answer: answer} %>
   <% end %>
 </div>
+
+<h2>Post an Answer</h2>
 
 <%= erb :'/answers/_answers-form', locals: {question: @question} %>
