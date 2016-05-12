@@ -1,0 +1,14 @@
+<!-- Edit an existing comment -->
+<h3>Edit Your Comment</h3>
+<form method="post" action="/comments">
+  <input type="hidden" name="_method" value="put">
+  <textarea name="body"><%= @comment.body %></textarea>
+  <input type="submit" value="Update Your Answer">
+</form>
+<% if @answer_update_errors %>
+  <% @answer_update_errors.each do |message| %>
+    <ul>
+      <li><%=message%></li>
+    </ul>
+  <% end %>
+<% end %>

@@ -8,6 +8,37 @@ post '/answers' do
   end
 end
 
+post '/answers/:id/upvote' do
+  answer = Answer.find_by(id: params[:id])
+  if answer.votes.where(vote_value: 1, user_id: current_user.id).length == answer.votes.where(vote_value: -1, user_id: current_user.id).length
+    answer.votes.create(vote_value: 1, user_id: current_user.id)
+    redirect "/questions/#{answer.question.id}"
+  elsif answer.votes.where(vote_value: 1, user_id: current_user.id).length < answer.votes.where(vote_value: -1, user_id: current_user.id).length
+    answer.votes.create(vote_value: 1, user_id: current_user.id)
+    redirect "/questions/#{answer.question.id}"
+  elsif answer.votes.find_by(vote_value: 1, user_id: current_user.id)
+    redirect "/questions/#{answer.question.id}"
+  else
+    answer.votes.create(vote_value: 1, user_id: current_user.id)
+    redirect "/questions/#{answer.question.id}"
+  end
+end
+
+post '/answers/:id/downvote' do
+  answer = Answer.find_by(id: params[:id])
+  if answer.votes.where(vote_value: 1, user_id: current_user.id).length == answer.votes.where(vote_value: -1, user_id: current_user.id).length
+    redirect "/questions/#{answer.question.id}"
+  elsif answer.votes.where(vote_value: 1, user_id: current_user.id).length < answer.votes.where(vote_value: -1, user_id: current_user.id).length
+    redirect "/questions/#{answer.question.id}"
+  elsif answer.votes.where(vote_value: 1, user_id: current_user.id).length > answer.votes.where(vote_value: -1, user_id: current_user.id).length
+    answer.votes.create(vote_value: -1, user_id: current_user.id)
+    redirect "/questions/#{answer.question.id}"
+  else
+    answer.votes.create(vote_value: -1, user_id: current_user.id)
+    redirect "/questions/#{answer.question.id}"
+  end
+end
+
 get '/answers/:id/edit' do
   @answer = Answer.find_by(id: params[:id])
   erb :'/answers/edit'
