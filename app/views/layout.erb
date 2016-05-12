@@ -18,18 +18,35 @@
 <title>Beer Overflow</title>
 </head>
 <body>
-  <h1><a href="/">Beer Overflow</a></h1>
-
+  <nav>
   <% if logged_in? %>
   <a href='/logout'>Logout</a>
   <a href='/users'>See all Users</a>
 
   <% else %>
-  <a href='/login'>Login</a>
   <a href='/users/new'>Sign Up</a>
-
+  <a href='/login'>Login</a>
+  <a href='/#'>Tour</a>
+  <a href='/#'>Help</a>
   <% end %>
-  <%= yield %>
+
+</nav>
+
+<section id="sub-nav">
+<a href="#">Questions</a>
+<a href="#">Users</a>
+<a href="#">Tags</a>
+<a href="#">Ask Question</a>
+<!-- <img src='images/logo.jpg'> -->
+</section>
+
+  <section id="container">
+    <h1><a href="/">Beer Overflow</a></h1>
+    <%= yield %>
+  </section>
+
+
+
 
 </body>
 </html>

@@ -1,1 +1,21 @@
 <h1>Profile page for <%= @user.username %></h1>
+<p><%=@user.bio %></p>
+
+
+<section id="user-questions">
+<p><%=@user.questions.length %> questions asked.</p>
+<% @user.questions.each do |question| %>
+<ul id="user-questions-list">
+<li><a href='/questions/<%=question.id%>'><%= question.title %></a></li>
+</ul>
+<% end %>
+</section>
+
+<section id="user-answers">
+  <p><%=@user.answers.length %> questions answered.</p>
+  <ul id="user-answers-list">
+    <% @user.answers.each do |answer| %>
+    <li><a href='/questions/<%= answer.question.id %>'><%=answer.question.title%></a></li>
+    <% end %>
+</ul>
+</section>

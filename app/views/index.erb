@@ -2,15 +2,16 @@
 
 <div class="questions-list-container">
   <% @questions.each do |question| %>
-    <div class="inidividual-question-container">
-      <!-- number of votes, answers, views -->
+    <div class="individual-question-container">
+      <section id="vote-answer-count">number of votes, answers, views</section>
       <h2><a href="/questions/<%= question.id %>"><%= question.title %></a></h2>
       <% question.tags.each do |tag| %>
-        <ul>
-          <li><%= tag.name %></li>
-        </ul>
+
+          <p>Tags: <span class="tag-box"><%= tag.name %></span></p>
+
       <% end %>
-      <p><a href="/users/<%= question.user.id %>"><%= question.user.username %></a></p>
+      <p>Author: <a href="/users/<%= question.user.id %>"><%= question.user.username %></a></p>
+      <span class="updated-at"><p>Created at: <a href="/users/<%= question.user.id %>"><%= question.user.created_at %></span></a></p>
     </div>
   <% end %>
 </div>
