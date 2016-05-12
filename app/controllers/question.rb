@@ -31,6 +31,9 @@ end
 get '/questions/:id' do
   @question = Question.find_by(id: params[:id])
 
+  if logged_in?
+    @current_user = current_user
+  end
   erb :'/questions/show'
 end
 
