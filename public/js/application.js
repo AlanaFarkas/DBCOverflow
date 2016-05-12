@@ -1,7 +1,35 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $('#post-answer-container').on('submit', '#answer-form', function(e) {
+      e.preventDefault();
+
+      var data = $(e.target).serialize();
+      var url = e.target.action;
+      var type = e.target.method;
+
+      $.ajax({
+        type: type,
+        url: url,
+        data: data
+      }).done(function(response){
+        $('#answer-list').append(response);
+      });
+    });
+
+  $('#question-comments-container').on('submit', '#new-comment-form', function(e){
+      e.preventDefault();
+
+      var data= $(e.target).serialize();
+      var url = e.target.action;
+      var type = e.target.method;
+      debugger;
+
+      $.ajax({
+        type: type,
+        url: url,
+        data: data
+      }).done(function(response){
+        $('#question-comment-list').append(response);
+      });
+  });
 });

@@ -1,7 +1,12 @@
 post '/answers' do
   @answer = Answer.new(body: params[:body], user_id: current_user.id, question_id: params[:question_id])
   if @answer.save
-    redirect "/questions/#{params[:question_id]}"
+
+    if request.xhr?
+      erb :'/answers/_answers', layout: false, locals: {answer: @answer}
+    else
+      redirect "/questions/#{params[:question_id]}"
+    end
   else
     @answer_errors = @answer.errors.full_messages
     redirect "/questions/#{params[:question_id]}"

@@ -11,9 +11,16 @@ end
 post '/comments/question' do
   # binding.pry
   question = Question.find_by(id: params[:question_id])
-  question.comments.create(body: params[:body], user_id: params[:user_id])
-  # if @comment.save
+  question.comments.build(body: params[:body], user_id: params[:user_id])
+  if question.save
+    if request.xhr?
+      erb :'/comments/_questions-comments', layout: false, locals: {comment: question.comments.last}
+    else
+      redirect "/questions/#{params[:question_id]}"
+    end
+  else
     redirect "/questions/#{question.id}"
+  end
   # else
   #   @errors = @comment.errors.full_messages
   #   erb :'comments/new'

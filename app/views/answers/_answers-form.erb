@@ -1,6 +1,6 @@
   <!-- insert partial into questions show page for this form, which will be below the question/answer div -->
 
-  <form method="post" action="/answers">
+  <form id="answer-form" method="post" action="/answers">
     <input type="hidden" name="question_id" value="<%= question.id %>">
     <textarea name="body" placeholder="Answer"></textarea>
     <input type="submit" value="Post Your Answer">
