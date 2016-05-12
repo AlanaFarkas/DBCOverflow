@@ -17,16 +17,19 @@
   <p><a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></p>
   <p><%= @question.created_at %></p>
 
-  <h4> Comments </h4>
+  <div id="question-comments-container">
+    <h4> Comments </h4>
+    <div id="question-comment-list">
     <%  @question.comments.each do |comment| %>
       <%= erb :'/comments/_questions-comments', locals: {comment: comment} %>
     <% end %>
-
-    <% if logged_in? %>
+  </div>
+  <% if logged_in? %>
     <%= erb :'/comments/_comments-new-questions', locals: {question: @question} %>
     <% else %>
         <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
     <% end %>
+  </div>
 </div>
 
 <div id="number-answers">
@@ -43,7 +46,7 @@
   <% end %>
 </div>
 
-<div id="post-answer">
+<div id="post-answer-container">
   <h2>Post an Answer</h2>
 
   <% if logged_in? %>
