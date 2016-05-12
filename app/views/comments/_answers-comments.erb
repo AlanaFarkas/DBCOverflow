@@ -1,6 +1,4 @@
-<% comments.each do |comment| %>
- <p><%= comment.body %></p>
-      <p>Author: <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a></p>
-      <p> posted <%= comment.time_since_creation %> hours ago </p>
-<% end %>
+<p><%= comment.body %></p>
+<p>Author: <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a></p>
+<p> posted <%= comment.time_since_creation %> hours ago </p>
 

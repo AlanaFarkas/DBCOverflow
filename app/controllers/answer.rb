@@ -1,14 +1,15 @@
 post '/answers' do
   @answer = Answer.new(body: params[:body], user_id: current_user.id, question_id: params[:question_id])
-  if request.xhr?
-    @answer.save
-    erb :'/answers/_answers', layout: false, locals: {answer: @answer}
+  if @answer.save
+    if request.xhr?
+      erb :'/answers/_answers', layout: false, locals: {answer: @answer}
+    else
+      redirect "/questions/#{params[:question_id]}"
+    end
   else
-    @answer.save
+    @answer_errors = @answer.errors.full_messages
     redirect "/questions/#{params[:question_id]}"
   end
-  @answer_errors = @answer.errors.full_messages
-  redirect "/questions/#{params[:question_id]}"
 end
 
 post '/answers/:id/upvote' do
@@ -59,5 +60,8 @@ put '/answers' do
 end
 
 delete '/answers' do
+  answer = Answer.find_by(id: params[:answer])
+  answer.destroy
+  redirect "/questions/#{answer.question.id}"
   # add delete button to the actual post itself on the question show page
 end
