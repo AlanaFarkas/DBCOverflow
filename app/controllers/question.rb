@@ -29,6 +29,28 @@ post '/questions' do
   end
 end
 
+post '/questions/:id/upvote' do
+  question = Question.find_by(id: params[:id])
+  # binding.pry
+  if question.votes.find_by(vote_value: 1, user_id: current_user.id)
+    redirect "/questions/#{question.id}"
+  else
+    question.votes.create(vote_value: 1, user_id: current_user.id)
+    redirect "/questions/#{question.id}"
+  end
+end
+
+post '/questions/:id/downvote' do
+  question = Question.find_by(id: params[:id])
+  binding.pry
+  if question.votes.find_by(vote_value: -1, user_id: current_user.id)
+    redirect "/questions/#{question.id}"
+  else
+    question.votes.create(vote_value: -1, user_id: current_user.id)
+    redirect "/questions/#{question.id}"
+  end
+end
+
 get '/questions/:id' do
   @question = Question.find_by(id: params[:id])
   @comments = @question.comments

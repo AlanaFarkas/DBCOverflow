@@ -8,4 +8,8 @@ class Question < ActiveRecord::Base
 
   validates :title, presence: true, uniqueness: true
   validates :body, presence: true
+
+  def points
+    votes.sum(:vote_value)
+  end
 end
