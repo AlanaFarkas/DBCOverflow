@@ -1,7 +1,7 @@
 <div class="new-comment-form">
   <form method="post" action="/comments/answer">
     <input type="hidden" name="answer_id" value="<%=answer.id%>">
-    <input type="hidden" name="user_id" value="<%=answer.user.id%>">
+    <input type="hidden" name="user_id" value="<%=current_user.id%>">
 
     <!-- <input type="text" name="title" placeholder="Comment here"> -->
     <textarea name="body" placeholder="Comment here"></textarea>

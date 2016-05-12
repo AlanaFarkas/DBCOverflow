@@ -8,6 +8,10 @@
 
     <%= erb :'/comments/_answers-comments', layout: false, locals: {comments: answer.comments} %>
 
-    <%= erb :'/comments/_comments-new-answers', layout: false, locals: {answer: answer } %>
+    <% if logged_in? %>
+      <%= erb :'/comments/_comments-new-answers', layout: false, locals: {answer: answer } %>
+    <% else %>
+      <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
+    <% end %>
   </div>
 </div>

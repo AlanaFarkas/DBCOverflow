@@ -22,7 +22,11 @@
     <%= erb :'/comments/_questions-comments', locals: {comment: comment} %>
   <% end %>
 
+  <% if logged_in? %>
   <%= erb :'/comments/_comments-new-questions', locals: {question: @question} %>
+  <% else %>
+      <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
+  <% end %>
 
 </div>
 
@@ -40,4 +44,8 @@
 
 <h2>Post an Answer</h2>
 
-<%= erb :'/answers/_answers-form', locals: {question: @question} %>
+<% if logged_in? %>
+  <%= erb :'/answers/_answers-form', locals: {question: @question} %>
+<% else %>
+  <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
+<% end %>
