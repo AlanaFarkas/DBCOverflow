@@ -1,0 +1,18 @@
+<!-- Create new comments for answers-->
+
+<div class="new-comment-form">
+  <form method="post" action="/comments/answer">
+    <input type="hidden" name="answer_id" value="<%=answer.id%>">
+    <input type="hidden" name="user_id" value="<%=current_user.id%>">
+    <textarea name="body" placeholder="Comment here"></textarea>
+    <input type="submit" value="Post Your Comment">
+  </form>
+
+  <% if @errors %>
+    <% @errors.each do |message| %>
+      <ul>
+        <li><%=message%></li>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
