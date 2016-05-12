@@ -1,2 +1,18 @@
-<!-- Create new comments
- -->
+<!-- Create new comments-->
+<div class="new-comment-form">
+  <form method="post" action="/comments">
+
+    <!-- <input type="text" name="title" placeholder="Comment here"> -->
+    <textarea name="body" placeholder="Comment here"></textarea>
+    <!-- <input type="text" name="tags" placeholder="max 5 tags, separated by commas"> -->
+    <input type="submit" value="Post Your Comment">
+  </form>
+
+  <% if @errors %>
+    <% @errors.each do |message| %>
+      <ul>
+        <li><%=message%></li>
+      </ul>
+    <% end %>
+  <% end %>
+</div>
