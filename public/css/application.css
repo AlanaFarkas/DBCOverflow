@@ -184,11 +184,24 @@ footer {
 .form {
   width: 100%;
   margin: auto;
+  border: 1px solid black;
+  padding: 2em;
+
 }
 
 .form input {
   display: block;
-  margin: 1em;
+  /*margin: 1em;*/
+  margin: auto;
+  padding-right: 5em;
+
+}
+
+.form textarea {
+  display: block;
+  margin: auto;
+  padding: 1em;
+ /* margin: 1em 0em 1em 0em;*/
 }
 
 .tag-item {
