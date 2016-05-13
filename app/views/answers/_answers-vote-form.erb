@@ -1,7 +1,11 @@
- <form id="upvote-button-form-answer" method="post" action="/answers/<%= answer.id %>/upvote">
-    <button type="submit" name="submit_param" value="submit_value"></button>
+<div class="question-upvote">
+
+ <form class="upvote-button-form-answer" method="post" action="/answers/<%= answer.id %>/upvote">
+    <button class="vote-button" type="submit" name="submit_param" value="submit_value">cheers</button>
   </form>
-  <p id="answer-vote-count"><%= answer.points%></p>
-  <form id="downvote-button-form-answer" method="post" action="/answers/<%= answer.id %>/downvote">
-    <button type="submit" name="submit_param" value="submit_value"></button>
+  <p class="answer-vote-count"><%= answer.points%></p>
+  <form class="downvote-button-form-answer" method="post" action="/answers/<%= answer.id %>/downvote">
+    <button class="vote-button" type="submit" name="submit_param" value="submit_value">jeers</button>
   </form>
+
+</div>

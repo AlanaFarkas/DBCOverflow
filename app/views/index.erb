@@ -4,17 +4,21 @@
   <% @questions.each do |question| %>
     <div class="individual-question-container">
       <!-- <section id="vote-answer-count">Votes: <%= question.points%></section> -->
-      <section id='vote-answer-count-author'><p>Votes: <%= question.points%></p>
-      <p>Answers: <%= question.answers.length %></p>
-    <p>Author: <a href="/users/<%= question.user.id %>"><%= question.user.username %></a></p></section>
+      <section id='vote-answer-count-author'>
+        <ul>
+          <li>Votes: <%= question.points%></li>
+          <li>Answers: <%= question.answers.length %></li>
+          <li>Author: <a href="/users/<%= question.user.id %>"><%= question.user.username %></a></li>
+        </ul>
+      </section>
+
       <h2><a href="/questions/<%= question.id %>"><%= question.title %></a></h2>
-      <% question.tags.each do |tag| %>
 
-          <p>Tags: <span class="tag-box"><%= tag.name %></span></p>
+    <!--   <% question.tags.each do |tag| %>
+        <p>Tags: <span class="tag-box"><%= tag.name %></span></p>
+      <% end %> -->
 
-      <% end %>
-
-      <span class="updated-at"><p>Created at: <a href="/users/<%= question.user.id %>"><%= question.user.created_at %></span></a></p>
+      <span class="updated-at"><p>created <%= question.time_since_creation %> hours ago</span>
     </div>
   <% end %>
 </div>

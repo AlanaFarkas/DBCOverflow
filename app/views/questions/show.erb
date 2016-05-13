@@ -3,21 +3,19 @@
 <div id="question-body-container">
   <%= erb :'/questions/_questions-vote-form', layout: false, locals: {question: @question} %>
 
-  <p id="q-body"><%= @question.body %></p>
-  <% @question.tags.each do |tag| %>
-    <ul>
-    Tags:<li class="tag-item"><%= tag.name %></li>
-    </ul>
-   <% end %>
+  <div class="text-body">
+    <p><%= @question.body %></p>
+  </div>
 
-  <% if @current_user &&  @question.user.id == @current_user.id %>
-    <p><a href="/questions/<%=@question.id%>/edit">Edit Question</a></p>
-  <% end %>
+   <ul class="post-info">
+    <% if @current_user &&  @question.user.id == @current_user.id %>
+      <li><a href="/questions/<%=@question.id%>/edit">edit question</a></li>
+    <% end %>
+    <li><a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></li>
+    <li>posted <%= @question.time_since_creation %> hours ago</li>
+   </ul>
 
-  <p>Author: <a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></p>
-  <p>posted <%= @question.time_since_creation %> hours ago</p>
-
-  <div id="question-comments-container">
+  <div class="comment-container" id="question-comments-container">
     <h4> Comments </h4>
     <div id="question-comment-list">
       <%  @question.comments.each do |comment| %>
@@ -32,41 +30,13 @@
   </div>
 </div>
 
-
-
 <div id="answer-list">
   <div id="number-answers">
-  <% if @question.answers.length == 1 %>
-    <h2><%= @question.answers.length %> Answer</h2>
-  <% else %>
-   <h2><%= @question.answers.length %> Answers</h2>
-  <% end %>
-</div>
+    <h2>Answers</h2>
+  </div>
 
   <% @question.answers.each do |answer| %>
     <%= erb :'/answers/_answers', locals: {answer: answer} %>
-
-  <div class="answer-comments-container">
-    <h4>Comments</h4>
-      <div class="answer-comment-list">
-        <% answer.comments.each do |comment| %>
-          <%= erb :'/comments/_answers-comments', layout: false, locals: {comment: comment} %>
-        <% end %>
-      </div>
-      <% if logged_in? %>
-        <%= erb :'/comments/_comments-new-answers', layout: false, locals: {answer: answer } %>
-      <% else %>
-        <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
-      <% end %>
-  </div>
-    <% if logged_in? %>
-      <form id="answer-delete" method="post" action="/answers">
-        <input type="hidden" name="_method" value="delete">
-        <input type="hidden" name="answer" value="<%=answer.id%>">
-        <input type="submit" value="delete this answer">
-      </form>
-    <% end %>
-
   <% end %>
 </div>
 
