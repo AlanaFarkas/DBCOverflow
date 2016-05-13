@@ -47,8 +47,9 @@ $(document).ready(function() {
   });
 
   // Comment button answers
-  $(".new-comment-button-answer").on("click", function(e) {
+  $("#answer-list").on("click", ".new-comment-button-answer", function(e) {
     e.preventDefault();
+    // debugger;
     $(e.target).hide();
     $(e.target).siblings(".new-comment-form-answer").show();
   });
@@ -136,6 +137,7 @@ $(document).ready(function() {
     });
   });
 
+  // Delete answer
   $('#answer-list').on('submit', '#answer-delete', function(e) {
     e.preventDefault();
 

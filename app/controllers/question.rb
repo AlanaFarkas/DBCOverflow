@@ -38,7 +38,6 @@ post '/questions/:id/upvote' do
       redirect "/questions/#{question.id}"
     end
 
-
   # if question.votes.where(vote_value: 1, user_id: current_user.id).length == question.votes.where(vote_value: -1, user_id: current_user.id).length
   #   question.votes.create(vote_value: 1, user_id: current_user.id)
   #   redirect "/questions/#{question.id}"
