@@ -1,6 +1,7 @@
 <!-- Create new comments for answers-->
 <div class="new-comment-form-answer-container">
-  <form class="new-comment-form-answer" method="post" action="/comments/answer">
+  <button class="new-comment-button-answer">Add a Comment</button>
+  <form class="new-comment-form-answer hidden" method="post" action="/comments/answer">
     <input type="hidden" name="answer_id" value="<%=answer.id%>">
     <input type="hidden" name="user_id" value="<%=current_user.id%>">
     <textarea name="body" placeholder="Comment here"></textarea>

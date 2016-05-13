@@ -1,5 +1,5 @@
 <!-- Answers partial for questions show page -->
-<div class="answer-body">
+<div id="answer-body-<%=answer.id%>">
   <%= erb :'/answers/_answers-vote-form', layout: false, locals: {answer: answer } %>
 
   <p><%= answer.body %></p>
@@ -7,3 +7,25 @@
   <p>posted <%= answer.time_since_creation %> hours ago</p>
 
 </div>
+
+ <div id="answer-comments-container-<%=answer.id%>">
+    <h4>Comments</h4>
+      <div class="answer-comment-list">
+        <% answer.comments.each do |comment| %>
+          <%= erb :'/comments/_answers-comments', layout: false, locals: {comment: comment} %>
+        <% end %>
+      </div>
+      <% if logged_in? %>
+        <%= erb :'/comments/_comments-new-answers', layout: false, locals: {answer: answer } %>
+      <% else %>
+        <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
+      <% end %>
+  </div>
+
+  <% if logged_in? %>
+    <form id="answer-delete" method="post" action="/answers">
+      <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="answer" value="<%=answer.id%>">
+      <input type="submit" value="delete this answer">
+    </form>
+  <% end %>

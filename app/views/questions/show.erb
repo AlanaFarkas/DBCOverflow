@@ -32,41 +32,13 @@
   </div>
 </div>
 
-
-
 <div id="answer-list">
   <div id="number-answers">
-  <% if @question.answers.length == 1 %>
-    <h2><%= @question.answers.length %> Answer</h2>
-  <% else %>
-   <h2><%= @question.answers.length %> Answers</h2>
-  <% end %>
-</div>
+    <h2>Answers</h2>
+  </div>
 
   <% @question.answers.each do |answer| %>
     <%= erb :'/answers/_answers', locals: {answer: answer} %>
-
-  <div class="answer-comments-container">
-    <h4>Comments</h4>
-      <div class="answer-comment-list">
-        <% answer.comments.each do |comment| %>
-          <%= erb :'/comments/_answers-comments', layout: false, locals: {comment: comment} %>
-        <% end %>
-      </div>
-      <% if logged_in? %>
-        <%= erb :'/comments/_comments-new-answers', layout: false, locals: {answer: answer } %>
-      <% else %>
-        <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
-      <% end %>
-  </div>
-    <% if logged_in? %>
-      <form id="answer-delete" method="post" action="/answers">
-        <input type="hidden" name="_method" value="delete">
-        <input type="hidden" name="answer" value="<%=answer.id%>">
-        <input type="submit" value="delete this answer">
-      </form>
-    <% end %>
-
   <% end %>
 </div>
 

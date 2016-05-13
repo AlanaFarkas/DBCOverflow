@@ -73,10 +73,11 @@ put '/answers' do
 end
 
 delete '/answers' do
-  answer = Answer.find_by(id: params[:answer])
+  answer_id = params[:answer]
+  answer = Answer.find_by(id: answer_id)
   answer.destroy
   if request.xhr?
-
+    answer_id.to_s
   else
     redirect "/questions/#{answer.question.id}"
   end
