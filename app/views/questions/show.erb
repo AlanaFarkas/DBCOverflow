@@ -3,10 +3,10 @@
 <div id="question-body-container">
   <%= erb :'/questions/_questions-vote-form', layout: false, locals: {question: @question} %>
 
-  <p><%= @question.body %></p>
+  <p id="q-body"><%= @question.body %></p>
   <% @question.tags.each do |tag| %>
     <ul>
-      <li><%= tag.name %></li>
+    Tags:<li class="tag-item"><%= tag.name %></li>
     </ul>
    <% end %>
 
@@ -32,15 +32,16 @@
   </div>
 </div>
 
-<div id="number-answers">
+
+
+<div id="answer-list">
+  <div id="number-answers">
   <% if @question.answers.length == 1 %>
     <h2><%= @question.answers.length %> Answer</h2>
   <% else %>
    <h2><%= @question.answers.length %> Answers</h2>
   <% end %>
 </div>
-
-<div id="answer-list">
   <% @question.answers.each do |answer| %>
     <%= erb :'/answers/_answers', locals: {answer: answer} %>
 
