@@ -31,33 +31,47 @@ end
 
 post '/questions/:id/upvote' do
   question = Question.find_by(id: params[:id])
-  if question.votes.where(vote_value: 1, user_id: current_user.id).length == question.votes.where(vote_value: -1, user_id: current_user.id).length
-    question.votes.create(vote_value: 1, user_id: current_user.id)
-    redirect "/questions/#{question.id}"
-  elsif question.votes.where(vote_value: 1, user_id: current_user.id).length < question.votes.where(vote_value: -1, user_id: current_user.id).length
-    question.votes.create(vote_value: 1, user_id: current_user.id)
-    redirect "/questions/#{question.id}"
-  elsif question.votes.find_by(vote_value: 1, user_id: current_user.id)
-    redirect "/questions/#{question.id}"
-  else
-    question.votes.create(vote_value: 1, user_id: current_user.id)
-    redirect "/questions/#{question.id}"
-  end
+  question.votes.create(vote_value: 1, user_id: current_user.id)
+    if request.xhr?
+      question.points.to_s
+    else
+      redirect "/questions/#{question.id}"
+    end
+
+
+  # if question.votes.where(vote_value: 1, user_id: current_user.id).length == question.votes.where(vote_value: -1, user_id: current_user.id).length
+  #   question.votes.create(vote_value: 1, user_id: current_user.id)
+  #   redirect "/questions/#{question.id}"
+  # elsif question.votes.where(vote_value: 1, user_id: current_user.id).length < question.votes.where(vote_value: -1, user_id: current_user.id).length
+  #   question.votes.create(vote_value: 1, user_id: current_user.id)
+  #   redirect "/questions/#{question.id}"
+  # elsif question.votes.find_by(vote_value: 1, user_id: current_user.id)
+  #   redirect "/questions/#{question.id}"
+  # else
+  #   question.votes.create(vote_value: 1, user_id: current_user.id)
+  #   redirect "/questions/#{question.id}"
+  # end
 end
 
 post '/questions/:id/downvote' do
   question = Question.find_by(id: params[:id])
-  if question.votes.where(vote_value: 1, user_id: current_user.id).length == question.votes.where(vote_value: -1, user_id: current_user.id).length
-    redirect "/questions/#{question.id}"
-  elsif question.votes.where(vote_value: 1, user_id: current_user.id).length < question.votes.where(vote_value: -1, user_id: current_user.id).length
-    redirect "/questions/#{question.id}"
-  elsif question.votes.where(vote_value: 1, user_id: current_user.id).length > question.votes.where(vote_value: -1, user_id: current_user.id).length
-    question.votes.create(vote_value: -1, user_id: current_user.id)
-    redirect "/questions/#{question.id}"
+  question.votes.create(vote_value: -1, user_id: current_user.id)
+  if request.xhr?
+    question.points.to_s
   else
-    question.votes.create(vote_value: -1, user_id: current_user.id)
     redirect "/questions/#{question.id}"
   end
+  # if question.votes.where(vote_value: 1, user_id: current_user.id).length == question.votes.where(vote_value: -1, user_id: current_user.id).length
+  #   redirect "/questions/#{question.id}"
+  # elsif question.votes.where(vote_value: 1, user_id: current_user.id).length < question.votes.where(vote_value: -1, user_id: current_user.id).length
+  #   redirect "/questions/#{question.id}"
+  # elsif question.votes.where(vote_value: 1, user_id: current_user.id).length > question.votes.where(vote_value: -1, user_id: current_user.id).length
+  #   question.votes.create(vote_value: -1, user_id: current_user.id)
+  #   redirect "/questions/#{question.id}"
+  # else
+  #   question.votes.create(vote_value: -1, user_id: current_user.id)
+  #   redirect "/questions/#{question.id}"
+  # end
 end
 
 get '/questions/:id' do

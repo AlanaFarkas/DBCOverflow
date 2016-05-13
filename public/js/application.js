@@ -56,6 +56,34 @@ $(document).ready(function() {
 
   //Voting AJAX
 
+  $('#upvote-button-form-question').on('submit', function(e){
+    e.preventDefault();
 
+    var url = e.target.action;
+    var type = e.target.method;
+
+    $.ajax({
+      type: type,
+      url: url
+    }).done(function(response) {
+
+      $('#question-vote-count').text(response);
+    });
+
+  });
+
+  $('#downvote-button-form-question').on('submit', function(e){
+    e.preventDefault();
+
+    var url = e.target.action;
+    var type = e.target.method;
+
+    $.ajax({
+      type: type,
+      url: url
+    }).done(function(response) {
+      $('#question-vote-count').text(response);
+    });
+  });
 
 });
