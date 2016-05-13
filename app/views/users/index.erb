@@ -1,6 +1,7 @@
 <h1>See all Users</h1>
 
 <% @users.each do |user| %>
-<!--   <a href='/users/#{user.id}'><%=user.username %></a> -->
-  <a href='/users/<%=user.id%>'><%= user.username %></a>
+<ul class="user-list">
+  <li><a href='/users/<%=user.id%>'><%= user.username %></a></li>
+</ul>
 <% end %>

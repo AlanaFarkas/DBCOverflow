@@ -34,6 +34,7 @@ nav li {
 
 #website-header {
   float: left;
+  margin-left: 1em;
   color: #0066cc;
   font-family: 'Nunito', sans-serif;
 }
@@ -85,7 +86,7 @@ nav li {
 
 #beer-logo {
   float: left;
-  margin-left: 8%;
+  /*margin-left: 8%;*/
   height: 100%;
 }
 
@@ -167,6 +168,11 @@ footer {
   padding-bottom: 2em;
 }
 
+#answer-delete {
+  border-bottom: 1px dashed black;
+  padding-bottom: 1em;
+}
+
 #post-answer-container {
   padding-bottom: 2em;
 }
@@ -191,6 +197,15 @@ footer {
   display: inline;
   padding: 5px;
   margin-left: 5px;
+}
+
+.user-list {
+  display: inline-block;
+  list-style: none;
+}
+
+.user-list li {
+  display: inline-block;
 }
 
 .hidden {
