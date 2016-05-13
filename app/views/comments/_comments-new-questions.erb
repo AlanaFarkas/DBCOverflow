@@ -1,6 +1,6 @@
 <!-- Create new comments for questions-->
-<div class="new-comment-form-container">
-  <form id="new-comment-form" method="post" action="/comments/question">
+<div class="new-comment-form-question-container">
+  <form id="new-comment-form-question" method="post" action="/comments/question">
     <input type="hidden" name="question_id" value="<%=question.id%>">
     <input type="hidden" name="user_id" value="<%=current_user.id%>">
     <textarea name="body" placeholder="Comment here"></textarea>

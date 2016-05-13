@@ -1,7 +1,6 @@
 post '/answers' do
   @answer = Answer.new(body: params[:body], user_id: current_user.id, question_id: params[:question_id])
   if @answer.save
-
     if request.xhr?
       erb :'/answers/_answers', layout: false, locals: {answer: @answer}
     else
@@ -13,36 +12,37 @@ post '/answers' do
   end
 end
 
-post '/answers/:id/upvote' do
-  answer = Answer.find_by(id: params[:id])
-  if answer.votes.where(vote_value: 1, user_id: current_user.id).length == answer.votes.where(vote_value: -1, user_id: current_user.id).length
-    answer.votes.create(vote_value: 1, user_id: current_user.id)
-    redirect "/questions/#{answer.question.id}"
-  elsif answer.votes.where(vote_value: 1, user_id: current_user.id).length < answer.votes.where(vote_value: -1, user_id: current_user.id).length
-    answer.votes.create(vote_value: 1, user_id: current_user.id)
-    redirect "/questions/#{answer.question.id}"
-  elsif answer.votes.find_by(vote_value: 1, user_id: current_user.id)
-    redirect "/questions/#{answer.question.id}"
-  else
-    answer.votes.create(vote_value: 1, user_id: current_user.id)
-    redirect "/questions/#{answer.question.id}"
-  end
-end
+# post '/answers/:id/upvote' do
+#   answer = Answer.find_by(id: params[:id])
+#   answer.votes.create(vote_value: 1, user_id: current_user.id)
+# end
+#   # if answer.votes.where(vote_value: 1, user_id: current_user.id).length == answer.votes.where(vote_value: -1, user_id: current_user.id).length
+#   # answer.votes.create(vote_value: 1, user_id: current_user.id)
+#   # redirect "/questions/#{answer.question.id}"
+#   # elsif answer.votes.where(vote_value: 1, user_id: current_user.id).length < answer.votes.where(vote_value: -1, user_id: current_user.id).length
+#   #   answer.votes.create(vote_value: 1, user_id: current_user.id)
+#   #   redirect "/questions/#{answer.question.id}"
+#   # elsif answer.votes.find_by(vote_value: 1, user_id: current_user.id)
+#   #   redirect "/questions/#{answer.question.id}"
+#   # else
+#   #   answer.votes.create(vote_value: 1, user_id: current_user.id)
+#   #   redirect "/questions/#{answer.question.id}"
+#   # end
 
-post '/answers/:id/downvote' do
-  answer = Answer.find_by(id: params[:id])
-  if answer.votes.where(vote_value: 1, user_id: current_user.id).length == answer.votes.where(vote_value: -1, user_id: current_user.id).length
-    redirect "/questions/#{answer.question.id}"
-  elsif answer.votes.where(vote_value: 1, user_id: current_user.id).length < answer.votes.where(vote_value: -1, user_id: current_user.id).length
-    redirect "/questions/#{answer.question.id}"
-  elsif answer.votes.where(vote_value: 1, user_id: current_user.id).length > answer.votes.where(vote_value: -1, user_id: current_user.id).length
-    answer.votes.create(vote_value: -1, user_id: current_user.id)
-    redirect "/questions/#{answer.question.id}"
-  else
-    answer.votes.create(vote_value: -1, user_id: current_user.id)
-    redirect "/questions/#{answer.question.id}"
-  end
-end
+# post '/answers/:id/downvote' do
+#   answer = Answer.find_by(id: params[:id])
+#   if answer.votes.where(vote_value: 1, user_id: current_user.id).length == answer.votes.where(vote_value: -1, user_id: current_user.id).length
+#     redirect "/questions/#{answer.question.id}"
+#   elsif answer.votes.where(vote_value: 1, user_id: current_user.id).length < answer.votes.where(vote_value: -1, user_id: current_user.id).length
+#     redirect "/questions/#{answer.question.id}"
+#   elsif answer.votes.where(vote_value: 1, user_id: current_user.id).length > answer.votes.where(vote_value: -1, user_id: current_user.id).length
+#     answer.votes.create(vote_value: -1, user_id: current_user.id)
+#     redirect "/questions/#{answer.question.id}"
+#   else
+#     answer.votes.create(vote_value: -1, user_id: current_user.id)
+#     redirect "/questions/#{answer.question.id}"
+#   end
+# end
 
 get '/answers/:id/edit' do
   @answer = Answer.find_by(id: params[:id])
@@ -61,5 +61,8 @@ put '/answers' do
 end
 
 delete '/answers' do
+  answer = Answer.find_by(id: params[:answer])
+  answer.destroy
+  redirect "/questions/#{answer.question.id}"
   # add delete button to the actual post itself on the question show page
 end

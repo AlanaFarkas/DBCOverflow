@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+  // Post answer to question
   $('#post-answer-container').on('submit', '#answer-form', function(e) {
       e.preventDefault();
 
@@ -13,16 +14,17 @@ $(document).ready(function() {
         data: data
       }).done(function(response){
         $('#answer-list').append(response);
+        // $('#answer-form').find("textarea[body]").clear();
       });
     });
 
-  $('#question-comments-container').on('submit', '#new-comment-form', function(e){
+  // Comments for questions
+  $('#question-comments-container').on('submit', '#new-comment-form-question', function(e){
       e.preventDefault();
 
-      var data= $(e.target).serialize();
+      var data = $(e.target).serialize();
       var url = e.target.action;
       var type = e.target.method;
-      debugger;
 
       $.ajax({
         type: type,
@@ -32,4 +34,56 @@ $(document).ready(function() {
         $('#question-comment-list').append(response);
       });
   });
+
+  //Comments for answers
+  $('.answer-comments-container').on('submit', '.new-comment-form-answer', function(e) {
+    e.preventDefault();
+
+    var data = $(e.target).serialize();
+    var url = e.target.action;
+    var type = e.target.method;
+    // debugger;
+
+    $.ajax({
+      type: type,
+      url: url,
+      data: data
+    }).done(function(response){
+      // debugger;
+      $(e.target).closest(".new-comment-form-answer-container").siblings(".answer-comment-list").append(response);
+    });
+  });
+
+  //Voting AJAX
+
+  $('#upvote-button-form-question').on('submit', function(e){
+    e.preventDefault();
+
+    var url = e.target.action;
+    var type = e.target.method;
+
+    $.ajax({
+      type: type,
+      url: url
+    }).done(function(response) {
+
+      $('#question-vote-count').text(response);
+    });
+
+  });
+
+  $('#downvote-button-form-question').on('submit', function(e){
+    e.preventDefault();
+
+    var url = e.target.action;
+    var type = e.target.method;
+
+    $.ajax({
+      type: type,
+      url: url
+    }).done(function(response) {
+      $('#question-vote-count').text(response);
+    });
+  });
+
 });

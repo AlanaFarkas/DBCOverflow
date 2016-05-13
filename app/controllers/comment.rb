@@ -8,8 +8,8 @@ get '/comments/new' do
   erb :'comments/_comments-new'
 end
 
+# Post new comment question
 post '/comments/question' do
-  # binding.pry
   question = Question.find_by(id: params[:question_id])
   question.comments.build(body: params[:body], user_id: params[:user_id])
   if question.save
@@ -27,11 +27,19 @@ post '/comments/question' do
   # end
 end
 
+# Post new comment answer
 post '/comments/answer' do
   answer = Answer.find_by(id: params[:answer_id])
-  answer.comments.create(body: params[:body], user_id: params[:user_id])
-  # if @comment.save
+  answer.comments.build(body: params[:body], user_id: params[:user_id])
+  if answer.save
+    if request.xhr?
+      erb :'/comments/_answers-comments', layout: false, locals: {comment: answer.comments.last }
+    else
+      redirect "/questions/#{answer.question.id}"
+    end
+  else
     redirect "/questions/#{answer.question.id}"
+  end
   # else
   #   @errors = @comment.errors.full_messages
   #   erb :'comments/new'
