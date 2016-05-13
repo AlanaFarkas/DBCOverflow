@@ -42,6 +42,7 @@
    <h2><%= @question.answers.length %> Answers</h2>
   <% end %>
 </div>
+
   <% @question.answers.each do |answer| %>
     <%= erb :'/answers/_answers', locals: {answer: answer} %>
 
@@ -58,12 +59,14 @@
         <p><a href='/user/new'>Sign Up</a> or <a href='/login'>Login</a> to comment</p>
       <% end %>
   </div>
+    <% if logged_in? %>
+      <form id="answer-delete" method="post" action="/answers">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="answer" value="<%=answer.id%>">
+        <input type="submit" value="delete this answer">
+      </form>
+    <% end %>
 
-  <form method="post" action="/answers">
-    <input type="hidden" name="_method" value="delete">
-    <input type="hidden" name="answer" value="<%=answer.id%>">
-    <input type="submit" value="delete this answer">
-  </form>
   <% end %>
 </div>
 

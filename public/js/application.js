@@ -49,13 +49,12 @@ $(document).ready(function() {
       url: url,
       data: data
     }).done(function(response){
-      // debugger;
+      debugger;
       $(e.target).closest(".new-comment-form-answer-container").siblings(".answer-comment-list").append(response);
     });
   });
 
-  //Voting AJAX
-
+  //Voting question AJAX
   $('#upvote-button-form-question').on('submit', function(e){
     e.preventDefault();
 
@@ -83,6 +82,52 @@ $(document).ready(function() {
       url: url
     }).done(function(response) {
       $('#question-vote-count').text(response);
+    });
+  });
+
+  // Voting answer AJAX
+    $('#upvote-button-form-answer').on('submit', function(e){
+    e.preventDefault();
+
+    var url = e.target.action;
+    var type = e.target.method;
+
+    $.ajax({
+      type: type,
+      url: url
+    }).done(function(response) {
+
+      $('#answer-vote-count').text(response);
+    });
+
+  });
+
+  $('#downvote-button-form-answer').on('submit', function(e){
+    e.preventDefault();
+
+    var url = e.target.action;
+    var type = e.target.method;
+
+    $.ajax({
+      type: type,
+      url: url
+    }).done(function(response) {
+      $('#answer-vote-count').text(response);
+    });
+  });
+
+  $('#answer-delete').on('submit', function(e) {
+    e.preventDefault();
+
+    var url = e.target.action;
+    var type = e.target.method;
+    debugger;
+
+    $.ajax({
+      type: type,
+      url: url,
+    }).done(function(response){
+
     });
   });
 
