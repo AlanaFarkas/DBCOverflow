@@ -12,8 +12,14 @@ post '/answers' do
   end
 end
 
-# post '/answers/:id/upvote' do
-#   answer = Answer.find_by(id: params[:id])
+post '/answers/:id/upvote' do
+  answer = Answer.find_by(id: params[:id])
+  answer.votes.create(vote_value: 1, user_id: current_user.id)
+   if request.xhr?
+     answer.points.to_s
+   else
+    redirect "/questions/#{answer.question.id}"
+   end
 #   answer.votes.create(vote_value: 1, user_id: current_user.id)
 # end
 #   # if answer.votes.where(vote_value: 1, user_id: current_user.id).length == answer.votes.where(vote_value: -1, user_id: current_user.id).length
@@ -27,10 +33,16 @@ end
 #   # else
 #   #   answer.votes.create(vote_value: 1, user_id: current_user.id)
 #   #   redirect "/questions/#{answer.question.id}"
-#   # end
+  end
 
-# post '/answers/:id/downvote' do
-#   answer = Answer.find_by(id: params[:id])
+post '/answers/:id/downvote' do
+  answer = Answer.find_by(id: params[:id])
+  answer.votes.create(vote_value: -1, user_id: current_user.id)
+   if request.xhr?
+     answer.points.to_s
+   else
+    redirect "/questions/#{answer.question.id}"
+   end
 #   if answer.votes.where(vote_value: 1, user_id: current_user.id).length == answer.votes.where(vote_value: -1, user_id: current_user.id).length
 #     redirect "/questions/#{answer.question.id}"
 #   elsif answer.votes.where(vote_value: 1, user_id: current_user.id).length < answer.votes.where(vote_value: -1, user_id: current_user.id).length
@@ -42,7 +54,7 @@ end
 #     answer.votes.create(vote_value: -1, user_id: current_user.id)
 #     redirect "/questions/#{answer.question.id}"
 #   end
-# end
+end
 
 get '/answers/:id/edit' do
   @answer = Answer.find_by(id: params[:id])
@@ -63,6 +75,10 @@ end
 delete '/answers' do
   answer = Answer.find_by(id: params[:answer])
   answer.destroy
-  redirect "/questions/#{answer.question.id}"
-  # add delete button to the actual post itself on the question show page
+  if request.xhr?
+
+  else
+    redirect "/questions/#{answer.question.id}"
+  end
+
 end
