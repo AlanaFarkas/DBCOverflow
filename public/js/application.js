@@ -50,7 +50,7 @@ $(document).ready(function() {
   $(".new-comment-button-answer").on("click", function(e) {
     e.preventDefault();
     $(e.target).hide();
-    $(".new-comment-form-answer").show();
+    $(e.target).siblings(".new-comment-form-answer").show();
   });
 
   //Comments for answers
@@ -106,9 +106,9 @@ $(document).ready(function() {
   });
 
   // Voting answer AJAX
-    $('#upvote-button-form-answer').on('submit', function(e){
+    $('#answer-list').on('submit', '.upvote-button-form-answer', function(e){
     e.preventDefault();
-
+    // debugger;
     var url = e.target.action;
     var type = e.target.method;
 
@@ -116,13 +116,13 @@ $(document).ready(function() {
       type: type,
       url: url
     }).done(function(response) {
-
-      $('#answer-vote-count').text(response);
+      // debugger;
+      $(e.target).siblings(".answer-vote-count").text(response);
     });
 
   });
 
-  $('#downvote-button-form-answer').on('submit', function(e){
+  $('#answer-list').on('submit', '.downvote-button-form-answer', function(e){
     e.preventDefault();
 
     var url = e.target.action;
@@ -132,7 +132,7 @@ $(document).ready(function() {
       type: type,
       url: url
     }).done(function(response) {
-      $('#answer-vote-count').text(response);
+      $(e.target).siblings(".answer-vote-count").text(response);
     });
   });
 

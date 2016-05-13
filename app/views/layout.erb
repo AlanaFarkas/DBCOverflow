@@ -20,27 +20,29 @@
 <body>
   <nav>
   <% if logged_in? %>
-  <a href='/logout'>Logout</a>
-  <a href='/users'>See all Users</a>
-
+  <ul>
+    <li><a href='/users/<%=current_user.id%>'><%=current_user.username%></a></li>
+    <li><a href='/logout'>Logout</a></li>
+  </ul>
   <% else %>
-  <a href='/users/new'>Sign Up</a>
-  <a href='/login'>Login</a>
-  <a href='/#'>Tour</a>
-  <a href='/#'>Help</a>
+  <ul>
+    <li><a href='/users/new'>Sign Up</a></li>
+    <li><a href='/login'>Login</a></li>
+  </ul>
   <% end %>
 
 </nav>
 
 <section id="sub-nav">
-<a href="#">Questions</a>
-<a href="#">Users</a>
-<a href="#">Tags</a>
-<% if logged_in? %>
-  <a href="/questions/new">Ask Question</a>
-<% end %>
-<img src='images/logo.jpg' id="beer-logo">
-<h1 id="website-header"><a href="/">Beer Overflow</a></h1>
+  <h1 id="website-header"><a href="/">Beer Overflow</a></h1>
+  <ul>
+    <li><a href="/users">Users</a></li>
+    <!-- <li><a href="/tags">Tags</a></li> -->
+    <% if logged_in? %>
+    <li><a href="/questions/new">Ask Question</a></li>
+    <% end %>
+  </ul>
+<!-- <img src='images/logo.jpg' id="beer-logo"> -->
 </section>
 
   <section id="container">
@@ -49,6 +51,6 @@
 
 
 
-<footer>Alana, Caitlin, John, and Ted Productions</footer>
+<!-- <footer>Alana, Caitlin, John, and Ted Productions</footer> -->
 </body>
 </html>

@@ -1,4 +1,6 @@
-<p><%= comment.body %></p>
-<p>Author: <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a></p>
-<p> posted <%= comment.time_since_creation %> hours ago </p>
+<p class="comment-body"><%= comment.body %></p>
+<ul class="post-info comment-info">
+  <li>Author: <a href="/users/<%= comment.user.id %>"><%= comment.user.username %></a></li>
+  <li> posted <%= comment.time_since_creation %> hours ago </li>
+</ul>
 

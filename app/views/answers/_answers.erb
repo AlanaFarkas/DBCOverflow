@@ -2,13 +2,19 @@
 <div id="answer-body-<%=answer.id%>">
   <%= erb :'/answers/_answers-vote-form', layout: false, locals: {answer: answer } %>
 
-  <p><%= answer.body %></p>
-  <p>Author: <a href="/users/<%= answer.user.id %>"><%= answer.user.username %></a></p>
-  <p>posted <%= answer.time_since_creation %> hours ago</p>
+  <div class="text-body">
+    <p><%= answer.body %></p>
+  </div>
+
+  <ul class="post-info">
+    <li>Author: <a href="/users/<%= answer.user.id %>"><%= answer.user.username %></a></li>
+    <li>posted <%= answer.time_since_creation %> hours ago</li>
+  </ul>
+
 
 </div>
 
- <div id="answer-comments-container-<%=answer.id%>">
+ <div class="comment-container answer-comment" id="answer-comments-container-<%=answer.id%>">
     <h4>Comments</h4>
       <div class="answer-comment-list">
         <% answer.comments.each do |comment| %>

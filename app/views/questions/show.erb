@@ -3,21 +3,19 @@
 <div id="question-body-container">
   <%= erb :'/questions/_questions-vote-form', layout: false, locals: {question: @question} %>
 
-  <p id="q-body"><%= @question.body %></p>
-  <% @question.tags.each do |tag| %>
-    <ul>
-    Tags:<li class="tag-item"><%= tag.name %></li>
-    </ul>
-   <% end %>
+  <div class="text-body">
+    <p><%= @question.body %></p>
+  </div>
 
-  <% if @current_user &&  @question.user.id == @current_user.id %>
-    <p><a href="/questions/<%=@question.id%>/edit">Edit Question</a></p>
-  <% end %>
+   <ul class="post-info">
+    <% if @current_user &&  @question.user.id == @current_user.id %>
+      <li><a href="/questions/<%=@question.id%>/edit">edit question</a></li>
+    <% end %>
+    <li><a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></li>
+    <li>posted <%= @question.time_since_creation %> hours ago</li>
+   </ul>
 
-  <p>Author: <a href="/users/<%= @question.user.id %>"><%= @question.user.username %></a></p>
-  <p>posted <%= @question.time_since_creation %> hours ago</p>
-
-  <div id="question-comments-container">
+  <div class="comment-container" id="question-comments-container">
     <h4> Comments </h4>
     <div id="question-comment-list">
       <%  @question.comments.each do |comment| %>
